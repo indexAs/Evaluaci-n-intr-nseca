@@ -73,7 +73,7 @@ button{
 </div>
 </div>
 
-<!-- DOMINIOS (NO SE MODIFICA CONTENIDO) -->
+<!-- DOMINIOS -->
 
 <div id="p1" class="pantalla">
 <h2>Deterioro cognitivo (Cognición)</h2>
@@ -83,10 +83,10 @@ button{
 </div>
 <div class="seccion">
 <b>Pruebas:</b><br>
-1. Recordar tres palabras (por ejemplo: sustantivos, orientación del arroz).<br>
-2. Orientación en tiempo y espacio:<br>
+1. Recordar tres palabras.<br>
+2. Orientación en tiempo y espacio.<br>
 • ¿Cuál es la fecha completa de hoy?<br>
-• ¿Dónde está usted ahora mismo (en casa, centro de salud, etc.)?<br>
+• ¿Dónde está usted ahora mismo?<br>
 • ¿Recuerda las tres palabras?
 </div>
 <label><input type="radio" name="cognicion" value="superada"> Superada</label>
@@ -98,9 +98,8 @@ button{
 </div>
 
 <div id="p2" class="pantalla">
-<h2>Movilidad limitada (Capacidad locomotora)</h2>
+<h2>Movilidad limitada</h2>
 <div class="seccion">
-<b>Prueba de la silla:</b><br>
 Levantarse de la silla cinco veces sin usar los brazos.<br>
 ¿Se levantó cinco veces en ≤ 14 segundos?
 </div>
@@ -113,13 +112,11 @@ Levantarse de la silla cinco veces sin usar los brazos.<br>
 </div>
 
 <div id="p3" class="pantalla">
-<h2>Nutrición deficiente (Vitalidad)</h2>
+<h2>Nutrición deficiente</h2>
 <div class="seccion">
-<b>1. Pérdida de peso:</b><br>
 ¿Ha perdido involuntariamente más de 3 kg en los últimos 3 meses?
 </div>
 <div class="seccion">
-<b>2. Falta de apetito:</b><br>
 ¿Ha tenido falta de apetito?
 </div>
 <label><input type="radio" name="nutricion" value="superada"> Respuesta negativa a ambas preguntas</label>
@@ -131,17 +128,9 @@ Levantarse de la silla cinco veces sin usar los brazos.<br>
 </div>
 
 <div id="p4" class="pantalla">
-<h2>Deficiencia visual (Visión)</h2>
+<h2>Deficiencia visual</h2>
 <div class="seccion">
-¿Tiene algún problema en los ojos?<br>
-¿Dificultad para ver de lejos o de cerca?
-</div>
-<div class="seccion">
-<b>Pruebas:</b><br>
-• Revisión ocular externa.<br>
-• Prueba de agudeza visual.<br>
-• Visión lejana (6/12 para cada ojo).<br>
-• Visión de cerca (N6 para ambos ojos).
+¿Tiene algún problema en los ojos?
 </div>
 <label><input type="radio" name="vision" value="superada"> Superada</label>
 <label><input type="radio" name="vision" value="no"> No superada</label>
@@ -152,10 +141,9 @@ Levantarse de la silla cinco veces sin usar los brazos.<br>
 </div>
 
 <div id="p5" class="pantalla">
-<h2>Pérdida auditiva (Audición)</h2>
+<h2>Pérdida auditiva</h2>
 <div class="seccion">
-¿Tiene dificultades para oír?<br>
-Prueba del susurro o audiometría tonal.
+¿Tiene dificultades para oír?
 </div>
 <label><input type="radio" name="audicion" value="superada"> Superada</label>
 <label><input type="radio" name="audicion" value="no"> No superada</label>
@@ -166,13 +154,11 @@ Prueba del susurro o audiometría tonal.
 </div>
 
 <div id="p6" class="pantalla">
-<h2>Síntomas depresivos (Capacidad psicológica)</h2>
+<h2>Síntomas depresivos</h2>
 <div class="seccion">
-En las últimas 2 semanas, ¿ha tenido alguno de los siguientes problemas?<br>
-• Un sentimiento de tristeza, melancolía o desesperanza.<br>
-• Poco interés o placer en hacer las cosas.
+En las últimas 2 semanas, ¿ha tenido tristeza o poco interés?
 </div>
-<label><input type="radio" name="depresion" value="superada"> Respuesta negativa a ambas preguntas</label>
+<label><input type="radio" name="depresion" value="superada"> Respuesta negativa a ambas</label>
 <label><input type="radio" name="depresion" value="no"> Respuesta afirmativa a alguna</label>
 <div class="botones">
 <button onclick="mostrar(5)">Anterior</button>
@@ -192,7 +178,7 @@ En las últimas 2 semanas, ¿ha tenido alguno de los siguientes problemas?<br>
 
 <script>
 
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbysuQQW-O6UaBb5JFbaV7DgN5suAHoYvPVJC5nXCSuH2e8h4Z-DgsMcMcMscapgW5-0/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMmUPgu8EpQ_ObeYAFwNzbJxuGkK7S7_3JZWnRiwXrFTiMAXzT3EfFXPlYzZhDn98b/exec";
 
 function mostrar(num){
   document.querySelectorAll(".pantalla").forEach(p=>p.classList.remove("activa"));
@@ -205,6 +191,11 @@ function valor(nombre){
 }
 
 function calcular(){
+
+  const nombre = document.getElementById("nombre").value;
+  const edad = document.getElementById("edad").value;
+  const sexo = document.getElementById("sexo").value;
+
   let dominios=["cognicion","movilidad","nutricion","vision","audicion","depresion"];
   let noSuperadas=0;
   let detalle="";
@@ -213,9 +204,9 @@ function calcular(){
     let v=valor(d);
     if(v==="no"){
       noSuperadas++;
-      detalle+="🔴 "+d.toUpperCase()+" no superada<br>";
+      detalle+= d.toUpperCase()+" no superada<br>";
     }else{
-      detalle+="🟢 "+d.toUpperCase()+" superada<br>";
+      detalle+= d.toUpperCase()+" superada<br>";
     }
   });
 
@@ -224,9 +215,9 @@ function calcular(){
     : "Posible deterioro en uno o más dominios";
 
   document.getElementById("resContenido").innerHTML =
-    "<b>Paciente:</b> "+nombre.value+"<br>"+
-    "<b>Edad:</b> "+edad.value+"<br>"+
-    "<b>Sexo:</b> "+sexo.value+"<br><br>"+
+    "<b>Paciente:</b> "+nombre+"<br>"+
+    "<b>Edad:</b> "+edad+"<br>"+
+    "<b>Sexo:</b> "+sexo+"<br><br>"+
     detalle+"<br><h3>"+conclusion+"</h3>";
 
   mostrar(7);
@@ -235,9 +226,9 @@ function calcular(){
 function enviarDatos(){
 
   const data = {
-    nombre: nombre.value,
-    edad: edad.value,
-    sexo: sexo.value,
+    nombre: document.getElementById("nombre").value,
+    edad: document.getElementById("edad").value,
+    sexo: document.getElementById("sexo").value,
     cognicion_resultado: valor("cognicion"),
     movilidad_resultado: valor("movilidad"),
     nutricion_resultado: valor("nutricion"),
@@ -252,7 +243,7 @@ function enviarDatos(){
     body: JSON.stringify(data),
     headers:{"Content-Type":"application/json"}
   })
-  .then(res=>res.json())
+  .then(res=>res.text())
   .then(()=>{
     alert("Datos enviados correctamente");
     reiniciar();
@@ -264,9 +255,10 @@ function enviarDatos(){
 }
 
 function reiniciar(){
-  document.querySelectorAll("input").forEach(i=>i.checked=false);
-  document.querySelectorAll("input[type=text],input[type=number]").forEach(i=>i.value="");
-  sexo.value="";
+  document.querySelectorAll("input[type=radio]").forEach(i=>i.checked=false);
+  document.getElementById("nombre").value="";
+  document.getElementById("edad").value="";
+  document.getElementById("sexo").value="";
   mostrar(0);
 }
 
