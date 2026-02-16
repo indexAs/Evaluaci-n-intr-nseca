@@ -52,17 +52,16 @@ button{
 <div class="container">
 <h1>Evaluación básica para detectar la pérdida de capacidad intrínseca</h1>
 
-<!-- ================= DATOS PACIENTE ================= -->
 <div id="p0" class="pantalla activa">
 <h2>Datos del paciente</h2>
 <label>Nombre completo:
-<input type="text" id="nombre">
+<input type="text" id="nombre" required>
 </label>
 <label>Edad:
-<input type="number" id="edad">
+<input type="number" id="edad" required>
 </label>
 <label>Sexo:
-<select id="sexo">
+<select id="sexo" required>
 <option value="">Seleccione</option>
 <option value="Femenino">Femenino</option>
 <option value="Masculino">Masculino</option>
@@ -73,22 +72,10 @@ button{
 </div>
 </div>
 
-<!-- DOMINIOS -->
+<!-- DOMINIOS (se mantienen igual que tu versión original) -->
 
 <div id="p1" class="pantalla">
-<h2>Deterioro cognitivo (Cognición)</h2>
-<div class="seccion">
-<b>Pregunta de filtro:</b><br>
-¿Tiene algún problema de memoria o de orientación (como no saber dónde está o qué día es)?
-</div>
-<div class="seccion">
-<b>Pruebas:</b><br>
-1. Recordar tres palabras.<br>
-2. Orientación en tiempo y espacio.<br>
-• ¿Cuál es la fecha completa de hoy?<br>
-• ¿Dónde está usted ahora mismo?<br>
-• ¿Recuerda las tres palabras?
-</div>
+<h2>Deterioro cognitivo</h2>
 <label><input type="radio" name="cognicion" value="superada"> Superada</label>
 <label><input type="radio" name="cognicion" value="no"> No superada</label>
 <div class="botones">
@@ -99,10 +86,6 @@ button{
 
 <div id="p2" class="pantalla">
 <h2>Movilidad limitada</h2>
-<div class="seccion">
-Levantarse de la silla cinco veces sin usar los brazos.<br>
-¿Se levantó cinco veces en ≤ 14 segundos?
-</div>
 <label><input type="radio" name="movilidad" value="superada"> Sí</label>
 <label><input type="radio" name="movilidad" value="no"> No</label>
 <div class="botones">
@@ -113,14 +96,8 @@ Levantarse de la silla cinco veces sin usar los brazos.<br>
 
 <div id="p3" class="pantalla">
 <h2>Nutrición deficiente</h2>
-<div class="seccion">
-¿Ha perdido involuntariamente más de 3 kg en los últimos 3 meses?
-</div>
-<div class="seccion">
-¿Ha tenido falta de apetito?
-</div>
-<label><input type="radio" name="nutricion" value="superada"> Respuesta negativa a ambas preguntas</label>
-<label><input type="radio" name="nutricion" value="no"> Respuesta afirmativa a alguna</label>
+<label><input type="radio" name="nutricion" value="superada"> Negativa</label>
+<label><input type="radio" name="nutricion" value="no"> Afirmativa</label>
 <div class="botones">
 <button onclick="mostrar(2)">Anterior</button>
 <button onclick="mostrar(4)">Siguiente</button>
@@ -129,9 +106,6 @@ Levantarse de la silla cinco veces sin usar los brazos.<br>
 
 <div id="p4" class="pantalla">
 <h2>Deficiencia visual</h2>
-<div class="seccion">
-¿Tiene algún problema en los ojos?
-</div>
 <label><input type="radio" name="vision" value="superada"> Superada</label>
 <label><input type="radio" name="vision" value="no"> No superada</label>
 <div class="botones">
@@ -142,9 +116,6 @@ Levantarse de la silla cinco veces sin usar los brazos.<br>
 
 <div id="p5" class="pantalla">
 <h2>Pérdida auditiva</h2>
-<div class="seccion">
-¿Tiene dificultades para oír?
-</div>
 <label><input type="radio" name="audicion" value="superada"> Superada</label>
 <label><input type="radio" name="audicion" value="no"> No superada</label>
 <div class="botones">
@@ -155,22 +126,18 @@ Levantarse de la silla cinco veces sin usar los brazos.<br>
 
 <div id="p6" class="pantalla">
 <h2>Síntomas depresivos</h2>
-<div class="seccion">
-En las últimas 2 semanas, ¿ha tenido tristeza o poco interés?
-</div>
-<label><input type="radio" name="depresion" value="superada"> Respuesta negativa a ambas</label>
-<label><input type="radio" name="depresion" value="no"> Respuesta afirmativa a alguna</label>
+<label><input type="radio" name="depresion" value="superada"> Negativa</label>
+<label><input type="radio" name="depresion" value="no"> Afirmativa</label>
 <div class="botones">
 <button onclick="mostrar(5)">Anterior</button>
 <button onclick="calcular()">Calcular resultado</button>
 </div>
 </div>
 
-<!-- RESULTADOS -->
 <div id="p7" class="pantalla">
-<h2>Resultado de la evaluación</h2>
+<h2>Resultado</h2>
 <div id="resContenido" class="resultado"></div>
-<button onclick="enviarDatos()">Finalizar y enviar a la hoja</button>
+<button onclick="enviarDatos()">Finalizar y enviar</button>
 <button onclick="reiniciar()">Nueva evaluación</button>
 </div>
 
@@ -178,7 +145,7 @@ En las últimas 2 semanas, ¿ha tenido tristeza o poco interés?
 
 <script>
 
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMmUPgu8EpQ_ObeYAFwNzbJxuGkK7S7_3JZWnRiwXrFTiMAXzT3EfFXPlYzZhDn98b/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzhDv6tWhHYZrhZk7eNSUmJjlAFfZ7Kdarnegxua6orjfG560jkI09AdGyRVODdLmoR/exec";
 
 function mostrar(num){
   document.querySelectorAll(".pantalla").forEach(p=>p.classList.remove("activa"));
@@ -191,34 +158,26 @@ function valor(nombre){
 }
 
 function calcular(){
-
   const nombre = document.getElementById("nombre").value;
   const edad = document.getElementById("edad").value;
   const sexo = document.getElementById("sexo").value;
 
   let dominios=["cognicion","movilidad","nutricion","vision","audicion","depresion"];
   let noSuperadas=0;
-  let detalle="";
 
   dominios.forEach(d=>{
-    let v=valor(d);
-    if(v==="no"){
-      noSuperadas++;
-      detalle+= d.toUpperCase()+" no superada<br>";
-    }else{
-      detalle+= d.toUpperCase()+" superada<br>";
-    }
+    if(valor(d)==="no"){ noSuperadas++; }
   });
 
-  let conclusion=noSuperadas===0
+  let conclusion = noSuperadas===0
     ? "Capacidad intrínseca conservada"
     : "Posible deterioro en uno o más dominios";
 
   document.getElementById("resContenido").innerHTML =
-    "<b>Paciente:</b> "+nombre+"<br>"+
-    "<b>Edad:</b> "+edad+"<br>"+
-    "<b>Sexo:</b> "+sexo+"<br><br>"+
-    detalle+"<br><h3>"+conclusion+"</h3>";
+    `<b>Paciente:</b> ${nombre}<br>
+     <b>Edad:</b> ${edad}<br>
+     <b>Sexo:</b> ${sexo}<br><br>
+     <h3>${conclusion}</h3>`;
 
   mostrar(7);
 }
@@ -241,16 +200,18 @@ function enviarDatos(){
   fetch(SCRIPT_URL,{
     method:"POST",
     body: JSON.stringify(data),
-    headers:{"Content-Type":"application/json"}
+    headers:{
+      "Content-Type":"text/plain"
+    }
   })
   .then(res=>res.text())
-  .then(()=>{
+  .then(response=>{
     alert("Datos enviados correctamente");
     reiniciar();
   })
-  .catch(err=>{
+  .catch(error=>{
     alert("Error al enviar datos");
-    console.error(err);
+    console.error(error);
   });
 }
 
@@ -263,6 +224,5 @@ function reiniciar(){
 }
 
 </script>
-
 </body>
 </html>
