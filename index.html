@@ -199,13 +199,10 @@ function enviarDatos(){
 
   fetch(SCRIPT_URL,{
     method:"POST",
-    body: JSON.stringify(data),
-    headers:{
-      "Content-Type":"text/plain"
-    }
+    mode:"no-cors",
+    body: JSON.stringify(data)
   })
-  .then(res=>res.text())
-  .then(response=>{
+  .then(()=>{
     alert("Datos enviados correctamente");
     reiniciar();
   })
@@ -214,6 +211,7 @@ function enviarDatos(){
     console.error(error);
   });
 }
+
 
 function reiniciar(){
   document.querySelectorAll("input[type=radio]").forEach(i=>i.checked=false);
