@@ -235,9 +235,9 @@ function calcular(){
 function enviarDatos(){
 
   const data = {
-    nombre: nombre.value,
-    edad: edad.value,
-    sexo: sexo.value,
+    nombre: document.getElementById("nombre").value,
+    edad: document.getElementById("edad").value,
+    sexo: document.getElementById("sexo").value,
     cognicion_resultado: valor("cognicion"),
     movilidad_resultado: valor("movilidad"),
     nutricion_resultado: valor("nutricion"),
@@ -247,19 +247,21 @@ function enviarDatos(){
     resultado_final: document.getElementById("resContenido").innerText
   };
 
-  fetch(SCRIPT_URL,{
-    method:"POST",
+  fetch(SCRIPT_URL, {
+    method: "POST",
     body: JSON.stringify(data),
-    headers:{"Content-Type":"application/json"}
+    headers: {
+      "Content-Type": "application/json"
+    }
   })
-  .then(res=>res.json())
-  .then(()=>{
+  .then(response => response.text())   // 👈 CAMBIO IMPORTANTE
+  .then(result => {
     alert("Datos enviados correctamente");
     reiniciar();
   })
-  .catch(err=>{
+  .catch(error => {
     alert("Error al enviar datos");
-    console.error(err);
+    console.error(error);
   });
 }
 
@@ -270,7 +272,8 @@ function reiniciar(){
   mostrar(0);
 }
 
-</script>
-
+</script> 
+  
 </body>
 </html>
+
