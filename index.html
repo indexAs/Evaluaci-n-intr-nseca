@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -192,7 +192,7 @@ En las últimas 2 semanas, ¿ha tenido alguno de los siguientes problemas?<br>
 
 <script>
 
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzm6XvZeLsPiK4-FKZqWeBaBEjF48vnnLURNbuiVX_-pHIfz0CAV2UGKupo1uzqPaAZ/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbysuQQW-O6UaBb5JFbaV7DgN5suAHoYvPVJC5nXCSuH2e8h4Z-DgsMcMcMscapgW5-0/exec";
 
 function mostrar(num){
   document.querySelectorAll(".pantalla").forEach(p=>p.classList.remove("activa"));
@@ -213,9 +213,9 @@ function calcular(){
     let v=valor(d);
     if(v==="no"){
       noSuperadas++;
-      detalle+=" "+d.toUpperCase()+" no superada<br>";
+      detalle+="🔴 "+d.toUpperCase()+" no superada<br>";
     }else{
-      detalle+=" "+d.toUpperCase()+" superada<br>";
+      detalle+="🟢 "+d.toUpperCase()+" superada<br>";
     }
   });
 
@@ -232,12 +232,12 @@ function calcular(){
   mostrar(7);
 }
 
-fufunction enviarDatos(){
+function enviarDatos(){
 
   const data = {
-    nombre: document.getElementById("nombre").value,
-    edad: document.getElementById("edad").value,
-    sexo: document.getElementById("sexo").value,
+    nombre: nombre.value,
+    edad: edad.value,
+    sexo: sexo.value,
     cognicion_resultado: valor("cognicion"),
     movilidad_resultado: valor("movilidad"),
     nutricion_resultado: valor("nutricion"),
@@ -247,24 +247,21 @@ fufunction enviarDatos(){
     resultado_final: document.getElementById("resContenido").innerText
   };
 
-  fetch(SCRIPT_URL, {
-    method: "POST",
+  fetch(SCRIPT_URL,{
+    method:"POST",
     body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json"
-    }
+    headers:{"Content-Type":"application/json"}
   })
-  .then(response => response.text())  
-  .then(result => {
+  .then(res=>res.json())
+  .then(()=>{
     alert("Datos enviados correctamente");
     reiniciar();
   })
-  .catch(error => {
+  .catch(err=>{
     alert("Error al enviar datos");
-    console.error(error);
+    console.error(err);
   });
 }
-
 
 function reiniciar(){
   document.querySelectorAll("input").forEach(i=>i.checked=false);
@@ -277,5 +274,3 @@ function reiniciar(){
 
 </body>
 </html>
-
-
